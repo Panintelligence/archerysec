@@ -70,6 +70,7 @@ class bandit_scan_results_db(models.Model):
     vuln_status = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='Bandit', editable=False)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     username = models.CharField(max_length=256, null=True)
 
 
@@ -103,6 +104,7 @@ class dependencycheck_scan_results_db(models.Model):
     false_positive_hash = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     name = models.TextField(blank=True, null=True)
     cvssScore = models.TextField(blank=True, null=True)
     cvssAccessVector = models.TextField(blank=True, null=True)
@@ -165,6 +167,7 @@ class retirejs_scan_results_db(models.Model):
     issue = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='RetireJs', editable=False)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     username = models.CharField(max_length=256, null=True)
 
 
@@ -215,6 +218,7 @@ class findbugs_scan_results_db(models.Model):
     risk = models.TextField(blank=True)
     scanner = models.TextField(default='Findbugs', editable=False)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     username = models.CharField(max_length=256, null=True)
 
 
@@ -258,6 +262,7 @@ class checkmarx_scan_results_db(models.Model):
 
     scanner = models.TextField(default='Checkmarx', editable=False)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     username = models.CharField(max_length=256, null=True)
 
 
@@ -301,6 +306,7 @@ class clair_scan_results_db(models.Model):
     FeatureVersion = models.TextField(null=True, blank=True)
     controls_tags_audit_text = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='Clair', editable=False)
     username = models.CharField(max_length=256, null=True)
 
@@ -346,6 +352,7 @@ class trivy_scan_results_db(models.Model):
     Severity = models.TextField(null=True, blank=True)
     References = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='Trivy', editable=False)
     username = models.CharField(max_length=256, null=True)
 
@@ -401,6 +408,7 @@ class npmaudit_scan_results_db(models.Model):
     scanner = models.TextField(default='npmaudit', editable=False)
     username = models.CharField(max_length=256, null=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
 
 
 class nodejsscan_scan_db(models.Model):
@@ -445,6 +453,7 @@ class nodejsscan_scan_results_db(models.Model):
     scanner = models.TextField(default='nodejsscan', editable=False)
     username = models.CharField(max_length=256, null=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
 
 
 class tfsec_scan_db(models.Model):
@@ -488,6 +497,7 @@ class tfsec_scan_results_db(models.Model):
     scanner = models.TextField(default='tfsec', editable=False)
     username = models.CharField(max_length=256, null=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
 
 
 class whitesource_scan_db(models.Model):
@@ -544,6 +554,7 @@ class whitesource_scan_results_db(models.Model):
     scanner = models.TextField(default='whitesource', editable=False)
     username = models.CharField(max_length=256, null=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
 
 
 class gitlabsast_scan_db(models.Model):
@@ -586,6 +597,7 @@ class gitlabsast_scan_results_db(models.Model):
     identifiers = models.TextField(null=True, blank=True)
     Severity = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='gitlabsast', editable=False)
     username = models.CharField(max_length=256, null=True)
 
@@ -630,6 +642,7 @@ class gitlabcontainerscan_scan_results_db(models.Model):
     identifiers = models.TextField(null=True, blank=True)
     Severity = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='gitlabcontainerscan', editable=False)
     username = models.CharField(max_length=256, null=True)
 
@@ -676,6 +689,7 @@ class gitlabsca_scan_results_db(models.Model):
     identifiers = models.TextField(null=True, blank=True)
     links = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='gitlabsca', editable=False)
     username = models.CharField(max_length=256, null=True)
 
@@ -722,6 +736,7 @@ class semgrepscan_scan_results_db(models.Model):
     scanner = models.TextField(default='semgrepscan', editable=False)
     username = models.CharField(max_length=256, null=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
 
 
 class twistlock_scan_db(models.Model):
@@ -755,6 +770,7 @@ class twistlock_scan_results_db(models.Model):
     vuln_status = models.TextField(null=True, blank=True)
     Severity = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='twistlock', editable=False)
     username = models.CharField(max_length=256, null=True)
 
@@ -797,6 +813,7 @@ class brakeman_scan_results_db(models.Model):
     vuln_status = models.TextField(null=True, blank=True)
     severity = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='brakeman', editable=False)
     username = models.CharField(max_length=256, null=True)
     
