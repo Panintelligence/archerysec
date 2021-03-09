@@ -20,6 +20,7 @@ import hashlib
 from staticscanners.resources import GitlabcontainerscanResource
 from django.urls import reverse
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 
 
 def gitlabcontainerscan_list(request):
@@ -55,10 +56,6 @@ def gitlabcontainerscan_vuln_data(request):
     :return:
     """
     username = request.user.username
-    jira_url = ''
-    jira = jirasetting.objects.filter(username=username)
-    for d in jira:
-        jira_url = d.jira_server
 
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -114,8 +111,8 @@ def gitlabcontainerscan_vuln_data(request):
 
     return render(request, 'gitlabcontainerscan/gitlabcontainerscan_vuln_data.html',
                   {'gitlabcontainerscan_vuln_data': gitlabcontainerscan_vuln_data,
-
-                   'jira_url': jira_url
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
 
 
@@ -139,7 +136,10 @@ def gitlabcontainerscan_details(request):
                                                                         )
 
     return render(request, 'gitlabcontainerscan/gitlabcontainerscan_vuln_details.html',
-                  {'gitlabcontainerscan_vuln_details': gitlabcontainerscan_vuln_details}
+                  {'gitlabcontainerscan_vuln_details': gitlabcontainerscan_vuln_details,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
+                   }
                   )
 
 

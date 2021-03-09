@@ -20,6 +20,7 @@ import hashlib
 from staticscanners.resources import twistlockResource
 from django.urls import reverse
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
  
  
 def twistlock_list(request):
@@ -55,10 +56,6 @@ def twistlock_vuln_data(request):
     :return:
     """
     username = request.user.username
-    jira_url = ''
-    jira = jirasetting.objects.filter(username=username)
-    for d in jira:
-        jira_url = d.jira_server
  
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -115,8 +112,8 @@ def twistlock_vuln_data(request):
  
     return render(request, 'twistlock/twistlock_vuln_data.html',
                   {'twistlock_vuln_data': twistlock_vuln_data,
- 
-                   'jira_url': jira_url
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
  
  
@@ -140,7 +137,10 @@ def twistlock_details(request):
                                                                         )
  
     return render(request, 'twistlock/twistlock_vuln_details.html',
-                  {'twistlock_vuln_details': twistlock_vuln_details}
+                  {'twistlock_vuln_details': twistlock_vuln_details,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
+                   }
                   )
  
  

@@ -20,6 +20,7 @@ import hashlib
 from staticscanners.resources import nodejsscanResource
 from django.urls import reverse
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 
 
 def nodejsscan_list(request):
@@ -63,10 +64,6 @@ def nodejsscan_vuln_data(request):
     :return:
     """
     username = request.user.username
-    jira_url = ''
-    jira = jirasetting.objects.all()
-    for d in jira:
-        jira_url = d.jira_server
 
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -123,11 +120,10 @@ def nodejsscan_vuln_data(request):
                                                                      title=test_name,
                                                                      )
 
-
     return render(request, 'nodejsscan/nodejsscan_vuln_data.html',
                   {'nodejsscan_vuln_data': nodejsscan_vuln_data,
-
-                   'jira_url': jira_url
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
 
 
@@ -151,7 +147,10 @@ def nodejsscan_details(request):
                                                                         )
 
     return render(request, 'nodejsscan/nodejsscan_vuln_details.html',
-                  {'nodejsscan_vuln_details': nodejsscan_vuln_details}
+                  {'nodejsscan_vuln_details': nodejsscan_vuln_details,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
+                   }
                   )
 
 

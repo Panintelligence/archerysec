@@ -16,6 +16,7 @@
 
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 
+from jiraticketing.models import jirasetting
 from gitlabticketing.models import gitlabsetting
 from staticscanners.models import dependencycheck_scan_results_db, dependencycheck_scan_db
 import hashlib
@@ -111,6 +112,7 @@ def dependencycheck_vuln_data(request):
 
     return render(request, 'dependencycheck/dependencycheckscan_vuln_data.html',
                   {'dependencycheck_vuln_data': dependencycheck_vuln_data,
+                   'jira_url': jirasetting.get_jira_url(username),
                    'gitlab_url': gitlabsetting.get_gitlab_url(username)})
 
 
@@ -135,7 +137,8 @@ def dependencycheck_details(request):
 
     return render(request, 'dependencycheck/dependencycheck_vuln_details.html',
                   {'dependencycheck_vuln_details': dependencycheck_vuln_details,
-                   }
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)}
                   )
 
 

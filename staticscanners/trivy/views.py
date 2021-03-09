@@ -20,6 +20,7 @@ import hashlib
 from staticscanners.resources import TrivyResource
 from django.urls import reverse
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 
 
 def trivy_list(request):
@@ -55,10 +56,6 @@ def trivy_vuln_data(request):
     :return:
     """
     username = request.user.username
-    jira_url = ''
-    jira = jirasetting.objects.filter(username=username)
-    for d in jira:
-        jira_url = d.jira_server
 
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -115,7 +112,8 @@ def trivy_vuln_data(request):
 
     return render(request, 'trivy/trivyscan_vuln_data.html',
                   {'trivy_vuln_data': trivy_vuln_data,
-                   'jira_url': jira_url
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
 
 
@@ -139,7 +137,10 @@ def trivy_details(request):
                                                               )
 
     return render(request, 'trivy/trivy_vuln_details.html',
-                  {'trivy_vuln_details': trivy_vuln_details}
+                  {'trivy_vuln_details': trivy_vuln_details,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
+                   }
                   )
 
 

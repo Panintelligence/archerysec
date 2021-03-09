@@ -24,3 +24,8 @@ class jirasetting(models.Model):
     jira_username = models.TextField(blank=True, null=True)
     jira_password = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
+
+    @staticmethod
+    def get_jira_url(username):
+        jira_settings = jirasetting.objects.filter(username=username)
+        return jira_settings[0].jira_server if jira_settings.count() > 0 else ''
