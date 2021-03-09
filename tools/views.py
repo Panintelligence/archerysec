@@ -28,6 +28,8 @@ import os
 from datetime import datetime
 from notifications.signals import notify
 from django.urls import reverse
+from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 
 # NOTE[gmedian]: in order to be more portable we just import everything rather than add anything in this very script
 from tools.nmap_vulners.nmap_vulners_view import nmap_vulners, nmap_vulners_port, nmap_vulners_scan
@@ -221,7 +223,10 @@ def nikto_result(request):
 
     return render(request,
                   'nikto_scan_result.html',
-                  {'scan_result': scan_result}
+                  {'scan_result': scan_result,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
+                   }
                   )
 
 
