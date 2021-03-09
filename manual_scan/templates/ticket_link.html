@@ -1,0 +1,6 @@
+{% if data.jira_ticket %}
+    <a href="{{ jira_url }}browse/{{ data.jira_ticket }}" target="_blank">{{ data.jira_ticket }}</a>
+{% endif %}
+{% if data.gitlab_ticket %}
+    <a href="{{ gitlab_url }}{{ data.gitlab_issue_url_component }}" target="_blank">{{ data.gitlab_ticket }}</a>
+{% endif %}
