@@ -37,6 +37,7 @@ from background_task.models import Task
 from background_task import background
 from datetime import datetime
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 import hashlib
 import json
 
@@ -121,10 +122,6 @@ def scan_vul_details(request):
     :param request:
     :return:
     """
-    jira_url = None
-    jira = jirasetting.objects.filter(username=username)
-    for d in jira:
-        jira_url = d.jira_server
     scanid = ""
     if request.method == 'GET':
         scanid = request.GET['scan_id']
@@ -188,8 +185,8 @@ def scan_vul_details(request):
                   'openvas_vuln_list.html',
                   {'all_vuln': all_vuln,
                    'scan_id': scanid,
-                   'jira_url': jira_url,
-
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
 
 
@@ -449,8 +446,9 @@ def vuln_check(request):
 
     return render(request, 'openvas_scan_data.html', {'vul_dat': vul_dat,
                                                       'cve_list': cve_list,
-                                                      'xref_list': xref_list
-
+                                                      'xref_list': xref_list,
+                                                      'jira_url': jirasetting.get_jira_url(username),
+                                                      'gitlab_url': gitlabsetting.get_gitlab_url(username)
                                                       })
 
 
