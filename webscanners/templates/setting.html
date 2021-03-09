@@ -57,6 +57,49 @@
                     </div>
                 </div>
             </div>
+        <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <h1 class="card-title">Gitlab Setting</h1>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                            <div class="card-body">
+                                                    <div class="form-group row">
+                                                        <label
+                                                                class="col-sm-4 col-form-label">Gitlab Server URL</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" readonly class="form-control-plaintext"
+                                                                   value="{{ gitlab_server }}" placeholder="Gitlab Endpoint">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label
+                                                                class="col-sm-4 col-form-label">Gitlab Token</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" readonly class="form-control-plaintext"
+                                                                   value="{{ gitlab_token }}" placeholder="Gitlab Token">
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-primary" href="{% url 'gitlabticketing:gitlab_setting' %}"
+                                                       role="button">Edit</a>
+
+                                                <form method="POST" action="{% url 'webscanners:setting' %}">{% csrf_token %}
+                                                     <input type="hidden" name="setting_of" value="gitlab">
+                                                    <button type="submit" class="btn btn-pinterest float-right">Test Connection</button>
+                                                </form>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">

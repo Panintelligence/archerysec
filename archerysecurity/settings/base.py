@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'networkscanners',
     'staticscanners',
     'jiraticketing',
+    'gitlabticketing',
     'tools',
     'manual_scan',
     'django.contrib.admin',
