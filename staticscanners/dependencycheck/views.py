@@ -14,7 +14,9 @@
 #
 # This file is part of ArcherySec Project.
 
-from django.shortcuts import render,  HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+
+from gitlabticketing.models import gitlabsetting
 from staticscanners.models import dependencycheck_scan_results_db, dependencycheck_scan_db
 import hashlib
 from staticscanners.resources import DependencyResource
@@ -109,7 +111,7 @@ def dependencycheck_vuln_data(request):
 
     return render(request, 'dependencycheck/dependencycheckscan_vuln_data.html',
                   {'dependencycheck_vuln_data': dependencycheck_vuln_data,
-                   })
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)})
 
 
 def dependencycheck_details(request):
@@ -127,12 +129,13 @@ def dependencycheck_details(request):
         vuln_id = None
 
     dependencycheck_vuln_details = dependencycheck_scan_results_db.objects.filter(username=username,
-        scan_id=scan_id,
-        vuln_id=vuln_id
-    )
+                                                                                  scan_id=scan_id,
+                                                                                  vuln_id=vuln_id
+                                                                                  )
 
     return render(request, 'dependencycheck/dependencycheck_vuln_details.html',
-                  {'dependencycheck_vuln_details': dependencycheck_vuln_details}
+                  {'dependencycheck_vuln_details': dependencycheck_vuln_details,
+                   }
                   )
 
 

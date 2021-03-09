@@ -23,3 +23,8 @@ class gitlabsetting(models.Model):
     gitlab_server = models.TextField(blank=True, null=True)
     gitlab_token = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
+
+    @staticmethod
+    def get_gitlab_url(username):
+        gitlab_settings = gitlabsetting.objects.filter(username=username)
+        return gitlab_settings[0].gitlab_server if gitlab_settings.count() > 0 else ''
