@@ -68,7 +68,7 @@ $(document).on('click', '.confirm-delete', function(){
                                         </label></th>
                                         <th>Vulnerability</th>
                                         <th>Risk</th>
-                                        <th>JIRA Ticket</th>
+                                        <th>Ticket</th>
                                         <th>False Positive</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -91,8 +91,7 @@ $(document).on('click', '.confirm-delete', function(){
                                             <a href="{% url 'zapscanner:zap_vuln_check' %}?vuln_id={{data.vuln_id}}">{{data.name}}</a>
                                         </td>
                                         <td><span class="badge badge-pill badge-{{data.vuln_color}}">{{data.risk}}</span></td>
-                                        <td><a href="{{jira_url}}browse/{{data.jira_ticket}}" target="_blank">{{data.jira_ticket}}</a>
-                                        </td>
+                                       <td>{% include "ticket_link.html" %}</td>
                                         {% if data.false_positive == 'No' %}
                                         <td>
                                             <form method="POST" action="{% url 'zapscanner:zap_vuln_details' %}">{% csrf_token %}
