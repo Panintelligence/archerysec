@@ -25,6 +25,7 @@ from scanners.scanner_plugin.web_scanner import burp_plugin
 from webscanners.models import burp_scan_db, burp_scan_result_db, burp_issue_definitions
 from datetime import datetime
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 from archerysettings.models import burp_setting_db
 import hashlib
 from webscanners.resources import BurpResource
@@ -224,7 +225,9 @@ def burp_vuln_data(request):
 
     return render(request,
                   'burpscanner/burp_vuln_data.html',
-                  {'vuln_data': vuln_data})
+                  {'vuln_data': vuln_data,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)})
 
 
 def burp_vuln_out(request):
@@ -234,10 +237,6 @@ def burp_vuln_out(request):
     :return:
     """
     username = request.user.username
-    jira_url = None
-    jira = jirasetting.objects.filter(username=username)
-    for d in jira:
-        jira_url = d.jira_server
 
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -291,7 +290,8 @@ def burp_vuln_out(request):
                                                    )
 
     return render(request, 'burpscanner/burp_vuln_out.html', {'vuln_data': vuln_data,
-                                                              'jira_url': jira_url,
+                                                              'jira_url': jirasetting.get_jira_url(username),
+                                                              'gitlab_url': gitlabsetting.get_gitlab_url(username),
                                                               })
 
 

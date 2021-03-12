@@ -20,6 +20,7 @@ import hashlib
 from staticscanners.resources import checkmarxResource
 from django.urls import reverse
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 
 
 def checkmarx_list(request):
@@ -61,10 +62,6 @@ def checkmarx_vuln_data(request):
     :return:
     """
     username = request.user.username
-    jira_url = ''
-    jira = jirasetting.objects.filter(username=username)
-    for d in jira:
-        jira_url = d.jira_server
 
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -118,10 +115,10 @@ def checkmarx_vuln_data(request):
     checkmarx_vuln_data = checkmarx_scan_results_db.objects.filter(username=username, scan_id=scan_id,
                                                                    name=name)
 
-
     return render(request, 'checkmarx/checkmarx_vuln_data.html',
                   {'checkmarx_vuln_data': checkmarx_vuln_data,
-                   'jira_url': jira_url
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
 
 
@@ -145,7 +142,10 @@ def checkmarx_details(request):
                                                                       )
 
     return render(request, 'checkmarx/checkmarx_vuln_details.html',
-                  {'checkmarx_vuln_details': checkmarx_vuln_details}
+                  {'checkmarx_vuln_details': checkmarx_vuln_details,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
+                   }
                   )
 
 

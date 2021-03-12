@@ -21,6 +21,7 @@ from django.shortcuts import render
 from webscanners.models import burp_scan_result_db, \
     arachni_scan_db, arachni_scan_result_db
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 import hashlib
 import PyArachniapi
 from archerysettings.models import arachni_settings_db
@@ -284,7 +285,9 @@ def arachni_vuln_data(request):
 
     return render(request,
                   'arachniscanner/arachni_vuln_data.html',
-                  {'vuln_data': vuln_data, })
+                  {'vuln_data': vuln_data,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)})
 
 
 def arachni_vuln_out(request):
@@ -294,11 +297,6 @@ def arachni_vuln_out(request):
     :return:
     """
     username = request.user.username
-    jira_url = None
-
-    jira = jirasetting.objects.all()
-    for d in jira:
-        jira_url = d.jira_server
 
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -356,11 +354,11 @@ def arachni_vuln_out(request):
                                                       name=name,
                                                       )
 
-
     return render(request,
                   'arachniscanner/arachni_vuln_out.html',
                   {'vuln_data': vuln_data,
-                   'jira_url': jira_url,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username),
                    })
 
 

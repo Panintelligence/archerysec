@@ -20,6 +20,7 @@ import hashlib
 from staticscanners.resources import brakemanResource
 from django.urls import reverse
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
  
  
 def brakeman_list(request):
@@ -55,10 +56,6 @@ def brakeman_vuln_data(request):
     :return:
     """
     username = request.user.username
-    jira_url = ''
-    jira = jirasetting.objects.filter(username=username)
-    for d in jira:
-        jira_url = d.jira_server
  
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -112,14 +109,14 @@ def brakeman_vuln_data(request):
  
     brakeman_vuln_data = brakeman_scan_results_db.objects.filter(username=username, scan_id=scan_id,
                                                                      name=test_name)
- 
+
     return render(request, 'brakeman/brakeman_vuln_data.html',
                   {'brakeman_vuln_data': brakeman_vuln_data,
- 
-                   'jira_url': jira_url
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
- 
- 
+
+
 def brakeman_details(request):
     """
  
@@ -140,7 +137,10 @@ def brakeman_details(request):
                                                                         )
  
     return render(request, 'brakeman/brakeman_vuln_details.html',
-                  {'brakeman_vuln_details': brakeman_vuln_details}
+                  {'brakeman_vuln_details': brakeman_vuln_details,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
+                   }
                   )
  
  

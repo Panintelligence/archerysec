@@ -11,9 +11,16 @@
                  <div class="col-md-auto">
                     <div class="float-right">
                         <!-- Large modal -->
-                         <a href="/jira/submit_jira_ticket/?summary={{ data.plugin_name }}&description={{data.description}}%0a%0a%0a Vulnerable Host: {{data.scan_ip}} %0a%0a Vulnerable Port: {{data.port}} %0a%0a Solution: {{data.solution}} %0a%0a Archery URL: {SERVERIP}/networkscanners/nessus_vuln_check/?vuln_id={{data.vul_id}} %0a%0a Request Header: {{ data.request_raw }}&scanner=nessus&vuln_id={{data.vul_id}}&scan_id={{data.scan_id}} "
-               class="btn btn-primary btn-lg active" role="button" aria-pressed="true"> Create Jira Ticket</a>
-
+                        {% if jira_url %}
+                            <a href="/jira/submit_jira_ticket/?summary={{ data.plugin_name }}&description={{ data.description }}%0a%0a%0a Vulnerable Host: {{ data.scan_ip }} %0a%0a Vulnerable Port: {{ data.port }} %0a%0a Solution: {{ data.solution }} %0a%0a Archery URL: {SERVERIP}/networkscanners/nessus_vuln_check/?vuln_id={{ data.vul_id }} %0a%0a Request Header: {{ data.request_raw }}&scanner=nessus&vuln_id={{ data.vul_id }}&scan_id={{ data.scan_id }} "
+                               class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Jira
+                                Ticket</a>
+                        {% endif %}
+                        {% if gitlab_url %}
+                            <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.plugin_name }}&description={{ data.description }}%0a%0a%0a Vulnerable Host: {{ data.scan_ip }} %0a%0a Vulnerable Port: {{ data.port }} %0a%0a Solution: {{ data.solution }} %0a%0a Archery URL: {SERVERIP}/networkscanners/nessus_vuln_check/?vuln_id={{ data.vul_id }} %0a%0a Request Header: {{ data.request_raw }}&scanner=nessus&vuln_id={{ data.vul_id }}&scan_id={{ data.scan_id }} "
+                               class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Gitlab
+                                Ticket</a>
+                        {% endif %}
                     </div>
                 </div>
                 <h1>{{ data.plugin_name }}</h1>

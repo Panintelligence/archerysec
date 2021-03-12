@@ -67,7 +67,7 @@ $(document).on('click', '.confirm-delete', function(){
                                         <th>Name</th>
                                         <th>Filename Name</th>
                                         <th>Severity</th>
-                                        <th>JIRA Ticket</th>
+                                        <th>Ticket</th>
                                         <th>False Positive</th>
                                         <th>Status</th>
                                         <th>Delete</th>
@@ -95,8 +95,7 @@ $(document).on('click', '.confirm-delete', function(){
                                         <td><span
                                                 class="badge badge-pill badge-{{data.vul_col}}">{{data.severity}}</span></a>
                                         </td>
-                                        <td><a href="{{jira_url}}browse/{{data.jira_ticket}}" target="_blank">{{data.jira_ticket}}</a>
-                                        </td>
+                                        <td>{% include "ticket_link.html" %}</td>
                                         {% if data.false_positive == 'No' %}
                                         <td>
                                             <form method="POST" action="{% url 'checkmarx:checkmarx_vuln_data' %}">{% csrf_token %}

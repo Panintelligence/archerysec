@@ -20,6 +20,7 @@ import hashlib
 from staticscanners.resources import SemgrepResource
 from django.urls import reverse
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 
 
 def semgrepscan_list(request):
@@ -63,10 +64,6 @@ def semgrepscan_vuln_data(request):
     :return:
     """
     username = request.user.username
-    jira_url = ''
-    jira = jirasetting.objects.all()
-    for d in jira:
-        jira_url = d.jira_server
 
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -123,11 +120,10 @@ def semgrepscan_vuln_data(request):
     semgrepscan_vuln_data = semgrepscan_scan_results_db.objects.filter(username=username, scan_id=scan_id,
                                                                        check_id=test_name)
 
-
     return render(request, 'semgrepscan/semgrepscan_vuln_data.html',
                   {'semgrepscan_vuln_data': semgrepscan_vuln_data,
-
-                   'jira_url': jira_url
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
 
 
@@ -151,7 +147,10 @@ def semgrepscan_details(request):
                                                                           )
 
     return render(request, 'semgrepscan/semgrepscan_vuln_details.html',
-                  {'semgrepscan_vuln_details': semgrepscan_vuln_details}
+                  {'semgrepscan_vuln_details': semgrepscan_vuln_details,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
+                   }
                   )
 
 

@@ -31,6 +31,7 @@ from webscanners.models import zap_scan_results_db, \
     burp_scan_db, burp_scan_result_db
 from datetime import datetime
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 from archerysettings.models import zap_settings_db
 import hashlib
 from webscanners.resources import ZapResource
@@ -199,7 +200,7 @@ def launch_schudle_zap_scan(target_url, project_id, rescan_id, rescan, scan_id, 
     random_port = '8090'
 
     # Connection Test
-    zap_connect = zap_plugin.zap_connect(random_port, username='')
+    zap_connect = zap_plugin.zap_connect(random_port, username=username)
 
     try:
         zap_connect.spider.scan(url=target_url)
@@ -400,10 +401,6 @@ def zap_vuln_details(request):
     """
     username = request.user.username
     global scan_id, scan_name
-    jira_url = None
-    jira = jirasetting.objects.filter(username=username)
-    for d in jira:
-        jira_url = d.jira_server
 
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -471,7 +468,8 @@ def zap_vuln_details(request):
                   'zapscanner/zap_vuln_details.html',
                   {'zap_all_vul': zap_all_vul,
                    'scan_vul': scan_id,
-                   'jira_url': jira_url,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
 
 
@@ -806,7 +804,9 @@ def zap_vuln_check(request):
 
     return render(request, 'zapscanner/zap_vuln_check.html',
                   {'vul_dat': vul_dat,
-                   'evi': full_data
+                   'evi': full_data,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
 
 

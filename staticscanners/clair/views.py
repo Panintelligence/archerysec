@@ -20,6 +20,7 @@ import hashlib
 from staticscanners.resources import ClairResource
 from django.urls import reverse
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 
 
 def clair_list(request):
@@ -55,10 +56,6 @@ def clair_vuln_data(request):
     :return:
     """
     username = request.user.username
-    jira_url = ''
-    jira = jirasetting.objects.filter(username=username)
-    for d in jira:
-        jira_url = d.jira_server
 
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
@@ -114,10 +111,10 @@ def clair_vuln_data(request):
                                                            scan_id=scan_id,
                                                            Name=test_name)
 
-
     return render(request, 'clair/clairscan_vuln_data.html',
                   {'clair_vuln_data': clair_vuln_data,
-                   'jira_url': jira_url
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
 
 
@@ -141,7 +138,10 @@ def clair_details(request):
                                                               )
 
     return render(request, 'clair/clair_vuln_details.html',
-                  {'clair_vuln_details': clair_vuln_details}
+                  {'clair_vuln_details': clair_vuln_details,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
+                   }
                   )
 
 

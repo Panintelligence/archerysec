@@ -54,6 +54,7 @@ class nikto_vuln_db(models.Model):
     osvdb = models.TextField(blank=True, null=True)
     false_positive = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
+    gitlab_ticket = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
     dup_hash = models.TextField(null=True, blank=True)
     vuln_duplicate = models.TextField(null=True, blank=True)

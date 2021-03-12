@@ -19,6 +19,8 @@ from staticscanners.models import findbugs_scan_results_db, findbugs_scan_db
 import hashlib
 from staticscanners.resources import FindbugResource
 from django.urls import reverse
+from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 
 
 def findbugs_list(request):
@@ -111,7 +113,8 @@ def findbugs_vuln_data(request):
 
     return render(request, 'findbugs/findbugsscan_vuln_data.html',
                   {'findbugs_vuln_data': findbugs_vuln_data,
-
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
                    })
 
 
@@ -135,7 +138,10 @@ def findbugs_details(request):
                                                                     )
 
     return render(request, 'findbugs/findbugs_vuln_details.html',
-                  {'findbugs_vuln_details': findbugs_vuln_details}
+                  {'findbugs_vuln_details': findbugs_vuln_details,
+                   'jira_url': jirasetting.get_jira_url(username),
+                   'gitlab_url': gitlabsetting.get_gitlab_url(username)
+                   }
                   )
 
 

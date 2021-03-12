@@ -22,8 +22,14 @@
                     <!--<li><a href="/del_scan/?scan_scanid={{data.scan_scanid}}"><i-->
                     <!--class="icon-trash"></i> Delete</a></li>-->
                     <li>
-                        <a href="/jira/submit_jira_ticket/?summary=SSLScan Result&description=Vulnerable URL: {{ data.scan_url }} %0a%0a SSLScan Output: {{ data.sslscan_output }} &scanner=SSLScan&vuln_id={{data.vuln_id}}&scan_id={{data.scan_id}} "><i
-                                class="icon-random"></i> Jira Ticket</a>
+                        {% if jira_url %}
+                            <a href="/jira/submit_jira_ticket/?summary=SSLScan Result&description=Vulnerable URL: {{ data.scan_url }} %0a%0a SSLScan Output: {{ data.sslscan_output }} &scanner=SSLScan&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "><i
+                                    class="icon-random"></i>Create Jira Ticket</a>
+                        {% endif %}
+                        {% if gitlab_url %}
+                            <a href="/gitlab/submit_gitlab_ticket/?summary=SSLScan Result&description=Vulnerable URL: {{ data.scan_url }} %0a%0a SSLScan Output: {{ data.sslscan_output }} &scanner=SSLScan&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "><i
+                                    class="icon-random"></i>Create Gitlab Ticket</a>
+                        {% endif %}
                     </li>
                 </ul>
             </div>

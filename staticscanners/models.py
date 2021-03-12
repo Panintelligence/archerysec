@@ -20,6 +20,16 @@ from django.db import models
 
 
 # Create your models here.
+class Results(models.Model):
+    gitlab_ticket = models.TextField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def gitlab_issue_url_component(self):
+        return self.gitlab_ticket.replace('#', '/-/issues/')
+
+
 class bandit_scan_db(models.Model):
     scan_id = models.UUIDField(blank=True, null=True)
     rescan_id = models.TextField(blank=True, null=True)
@@ -44,7 +54,7 @@ class bandit_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class bandit_scan_results_db(models.Model):
+class bandit_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -70,6 +80,7 @@ class bandit_scan_results_db(models.Model):
     vuln_status = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='Bandit', editable=False)
     jira_ticket = models.TextField(null=True, blank=True)
+
     username = models.CharField(max_length=256, null=True)
 
 
@@ -89,7 +100,7 @@ class dependencycheck_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class dependencycheck_scan_results_db(models.Model):
+class dependencycheck_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -143,7 +154,7 @@ class retirejs_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class retirejs_scan_results_db(models.Model):
+class retirejs_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -184,7 +195,7 @@ class findbugs_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class findbugs_scan_results_db(models.Model):
+class findbugs_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -234,7 +245,7 @@ class checkmarx_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class checkmarx_scan_results_db(models.Model):
+class checkmarx_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -277,7 +288,7 @@ class clair_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class clair_scan_results_db(models.Model):
+class clair_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -321,7 +332,7 @@ class trivy_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class trivy_scan_results_db(models.Model):
+class trivy_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -366,7 +377,7 @@ class npmaudit_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class npmaudit_scan_results_db(models.Model):
+class npmaudit_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -419,7 +430,7 @@ class nodejsscan_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class nodejsscan_scan_results_db(models.Model):
+class nodejsscan_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -463,7 +474,7 @@ class tfsec_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class tfsec_scan_results_db(models.Model):
+class tfsec_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -506,7 +517,7 @@ class whitesource_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class whitesource_scan_results_db(models.Model):
+class whitesource_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -562,7 +573,7 @@ class gitlabsast_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class gitlabsast_scan_results_db(models.Model):
+class gitlabsast_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -606,7 +617,7 @@ class gitlabcontainerscan_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class gitlabcontainerscan_scan_results_db(models.Model):
+class gitlabcontainerscan_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -650,7 +661,7 @@ class gitlabsca_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class gitlabsca_scan_results_db(models.Model):
+class gitlabsca_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -663,7 +674,6 @@ class gitlabsca_scan_results_db(models.Model):
     vuln_duplicate = models.TextField(null=True, blank=True)
     false_positive_hash = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
-
     name = models.TextField(null=True, blank=True)
     message = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
@@ -696,7 +706,7 @@ class semgrepscan_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class semgrepscan_scan_results_db(models.Model):
+class semgrepscan_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -709,7 +719,6 @@ class semgrepscan_scan_results_db(models.Model):
     vuln_duplicate = models.TextField(null=True, blank=True)
     false_positive_hash = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
-
     check_id = models.TextField(null=True, blank=True)
     path = models.TextField(null=True, blank=True)
     start = models.TextField(null=True, blank=True)
@@ -740,7 +749,7 @@ class twistlock_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class twistlock_scan_results_db(models.Model):
+class twistlock_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -757,7 +766,6 @@ class twistlock_scan_results_db(models.Model):
     jira_ticket = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='twistlock', editable=False)
     username = models.CharField(max_length=256, null=True)
-
     name = models.TextField(blank=True, null=True)
     cvss = models.TextField(blank=True, null=True)
     vector = models.TextField(blank=True, null=True)
@@ -765,6 +773,7 @@ class twistlock_scan_results_db(models.Model):
     packageName = models.TextField(blank=True, null=True)
     packageVersion = models.TextField(blank=True, null=True)
     link = models.TextField(blank=True, null=True)
+
 
 class brakeman_scan_db(models.Model):
     scan_id = models.UUIDField(blank=True, null=True)
@@ -782,7 +791,7 @@ class brakeman_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class brakeman_scan_results_db(models.Model):
+class brakeman_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -799,7 +808,6 @@ class brakeman_scan_results_db(models.Model):
     jira_ticket = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='brakeman', editable=False)
     username = models.CharField(max_length=256, null=True)
-    
     name = models.TextField(blank=True, null=True)
     warning_code = models.TextField(blank=True, null=True)
     fingerprint = models.TextField(blank=True, null=True)
@@ -810,4 +818,3 @@ class brakeman_scan_results_db(models.Model):
     code = models.TextField(blank=True, null=True)
     render_path = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-

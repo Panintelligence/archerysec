@@ -9,10 +9,16 @@
                         <div class="col-md-auto">
                             <div class="float-right">
                                 <!-- Large modal -->
-                                <a href="/jira/submit_jira_ticket/?summary={{ data.message }}&description=%0a%0a%0a {{ data.description }} File :  {{ data.file }} %0a%0a Scanner : {{ data.gl_scanner }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=gitlabsca&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
-                                   class="btn btn-primary btn-lg active" role="button" aria-pressed="true"> Create Jira
-                                    Ticket</a>
-
+                                {% if jira_url %}
+                                    <a href="/jira/submit_jira_ticket/?summary={{ data.message }}&description=%0a%0a%0a {{ data.description }} File :  {{ data.file }} %0a%0a Scanner : {{ data.gl_scanner }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=gitlabsca&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                                       class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create
+                                        Jira Ticket</a>
+                                {% endif %}
+                                {% if gitlab_url %}
+                                    <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.message }}&description=%0a%0a%0a {{ data.description }} File :  {{ data.file }} %0a%0a Scanner : {{ data.gl_scanner }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=gitlabsca&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                                       class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create
+                                        Gitlab Ticket</a>
+                                {% endif %}
                             </div>
                         </div>
                         <h1>{{ data.message }}</h1>
