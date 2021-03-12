@@ -17,6 +17,7 @@
 import threading
 import time
 import uuid
+import requests
 import defusedxml.ElementTree as ET
 from django.contrib import auth
 from django.contrib import messages
@@ -48,6 +49,7 @@ from datetime import datetime
 from background_task.models import Task
 import os
 from jiraticketing.models import jirasetting
+from gitlabticketing.models import gitlabsetting
 from webscanners.models import netsparker_scan_db, \
     webinspect_scan_db
 from webscanners.zapscanner.views import launch_schudle_zap_scan
@@ -425,6 +427,10 @@ def setting(request):
     jira_url = None
     j_username = None
     password = None
+
+    gitlab_server = None
+    gitlab_token = None
+
     # Loading settings
 
     username = request.user.username
@@ -507,6 +513,14 @@ def setting(request):
     else:
         jira_password = signing.loads(password)
 
+    # Load Gitlab settings
+
+    gitlab_setting = gitlabsetting.objects.filter(username=username)
+
+    for gitlab in gitlab_setting:
+        gitlab_server = gitlab.gitlab_server
+        gitlab_token = signing.loads(gitlab.gitlab_token) if gitlab.gitlab_token is not None else None
+
     username = request.user.username
     zap_enabled = False
     random_port = '8091'
@@ -516,6 +530,7 @@ def setting(request):
     openvas_info = ''
     arachni_info = ''
     jira_info = ''
+    gitlab_info = ''
 
     if request.method == 'POST':
         setting_of = request.POST.get('setting_of')
@@ -626,6 +641,23 @@ def setting(request):
                 print(e)
                 jira_info = False
 
+        if setting_of == 'gitlab':
+            gitlab_setting = gitlabsetting.objects.filter(username=username)
+            gitlab_url = ''
+            gitlab_token = ''
+            for gitlab in gitlab_setting:
+                gitlab_url = gitlab.gitlab_server
+                gitlab_token = signing.loads(gitlab.gitlab_token)
+
+            try:
+                url = "{}api/v4/projects?simple=true&per_page=1".format(gitlab_url)
+                auth_token = 'bearer {}'.format(gitlab_token)
+                resp = requests.get(url, headers={'Authorization': auth_token})
+                gitlab_info = (resp.status_code is 200)
+            except Exception as e:
+                print(e)
+                gitlab_info = False
+
     return render(request, 'setting.html',
                   {'apikey': lod_apikey,
                    'zapath': zap_host,
@@ -645,6 +677,8 @@ def setting(request):
                    'jira_server': jira_server,
                    'jira_username': jira_username,
                    'jira_password': jira_password,
+                   'gitlab_server': gitlab_server,
+                   'gitlab_token': gitlab_token,
                    'nv_enabled': nv_enabled,
                    'nv_version': nv_version,
                    'nv_online': nv_online,
@@ -654,7 +688,8 @@ def setting(request):
                    'burp_info': burp_info,
                    'openvas_info': openvas_info,
                    'arachni_info': arachni_info,
-                   'jira_info': jira_info
+                   'jira_info': jira_info,
+                   'gitlab_info': gitlab_info
                    })
 
 

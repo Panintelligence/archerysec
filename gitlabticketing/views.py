@@ -42,6 +42,8 @@ def gitlab_setting(request):
     """
     r_username = request.user.username
     all_gitlab_settings = gitlabsetting.objects.filter(username=r_username)
+    gitlab_url = ''
+    gitlab_token = ''
     for gitlab in all_gitlab_settings:
         gitlab_url = gitlab.gitlab_server
         gitlab_token = signing.loads(gitlab.gitlab_token)

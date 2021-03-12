@@ -81,7 +81,7 @@
                                                         <label
                                                                 class="col-sm-4 col-form-label">Gitlab Token</label>
                                                         <div class="col-sm-6">
-                                                            <input type="text" readonly class="form-control-plaintext"
+                                                            <input type="password" readonly class="form-control-plaintext"
                                                                    value="{{ gitlab_token }}" placeholder="Gitlab Token">
                                                         </div>
                                                     </div>
@@ -522,6 +522,22 @@
     <script>
             $(window).load(function() {
                 toastr.success('Jira Connection Found');
+            });
+    </script>
+    {% endif %}
+
+    {% if gitlab_info == False %}
+    <script>
+            $(window).load(function() {
+                toastr.error('Gitlab Connection Not Found');
+            });
+    </script>
+    {% endif %}
+
+    {% if gitlab_info == True %}
+    <script>
+            $(window).load(function() {
+                toastr.success('Gitlab Connection Found');
             });
     </script>
     {% endif %}
