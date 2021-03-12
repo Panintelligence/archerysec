@@ -27,4 +27,4 @@ class gitlabsetting(models.Model):
     @staticmethod
     def get_gitlab_url(username):
         gitlab_settings = gitlabsetting.objects.filter(username=username)
-        return gitlab_settings[0].gitlab_server if gitlab_settings.count() > 0 else ''
+        return gitlab_settings[len(gitlab_settings) - 1].gitlab_server if gitlab_settings.count() > 0 else ''

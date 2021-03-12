@@ -28,4 +28,4 @@ class jirasetting(models.Model):
     @staticmethod
     def get_jira_url(username):
         jira_settings = jirasetting.objects.filter(username=username)
-        return jira_settings[0].jira_server if jira_settings.count() > 0 else ''
+        return jira_settings[len(jira_settings) - 1].jira_server if jira_settings.count() > 0 else ''
