@@ -19,6 +19,16 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+class Results(models.Model):
+    gitlab_ticket = models.TextField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def gitlab_issue_url_component(self):
+        return self.gitlab_ticket.replace('#', '/-/issues/')
+
+
 class zap_spider_db(models.Model):
     spider_url = models.TextField(blank=True)
     spider_scanid = models.TextField(blank=True)
@@ -50,7 +60,7 @@ class zap_spider_results(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class zap_scan_results_db(models.Model):
+class zap_scan_results_db(Results):
     vuln_id = models.TextField(blank=True)
     scan_id = models.TextField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
@@ -91,7 +101,6 @@ class zap_scan_results_db(models.Model):
     date_time = models.DateTimeField(null=True)
     false_positive = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
-    gitlab_ticket = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
     dup_hash = models.TextField(null=True, blank=True)
     vuln_duplicate = models.TextField(null=True, blank=True)
@@ -129,7 +138,7 @@ class burp_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class burp_scan_result_db(models.Model):
+class burp_scan_result_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     project_id = models.TextField(blank=True)
@@ -158,7 +167,6 @@ class burp_scan_result_db(models.Model):
     internal_data = models.TextField(blank=True, null=True)
     false_positive = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
-    gitlab_ticket = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
     dup_hash = models.TextField(null=True, blank=True)
     vuln_duplicate = models.TextField(null=True, blank=True)
@@ -197,7 +205,7 @@ class netsparker_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class netsparker_scan_result_db(models.Model):
+class netsparker_scan_result_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     project_id = models.TextField(blank=True)
@@ -215,7 +223,6 @@ class netsparker_scan_result_db(models.Model):
     false_positive = models.TextField(null=True, blank=True)
     vuln_color = models.TextField(blank=True, null=True)
     jira_ticket = models.TextField(null=True, blank=True)
-    gitlab_ticket = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     impact = models.TextField(null=True, blank=True)
     actionsToTake = models.TextField(null=True, blank=True)
@@ -274,7 +281,7 @@ class arachni_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class arachni_scan_result_db(models.Model):
+class arachni_scan_result_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     project_id = models.TextField(blank=True)
@@ -305,7 +312,6 @@ class arachni_scan_result_db(models.Model):
     response_ip = models.TextField(blank=True)
     response_raw_headers = models.TextField(blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
-    gitlab_ticket = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
     dup_hash = models.TextField(null=True, blank=True)
     vuln_duplicate = models.TextField(null=True, blank=True)
@@ -343,7 +349,7 @@ class webinspect_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class webinspect_scan_result_db(models.Model):
+class webinspect_scan_result_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     project_id = models.TextField(blank=True)
@@ -354,7 +360,6 @@ class webinspect_scan_result_db(models.Model):
     false_positive = models.TextField(null=True, blank=True)
     vuln_color = models.TextField(blank=True, null=True)
     jira_ticket = models.TextField(null=True, blank=True)
-    gitlab_ticket = models.TextField(null=True, blank=True)
     scheme = models.TextField(blank=True, null=True)
     host = models.TextField(blank=True, null=True)
     port = models.TextField(blank=True, null=True)
@@ -396,7 +401,7 @@ class acunetix_scan_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class acunetix_scan_result_db(models.Model):
+class acunetix_scan_result_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     project_id = models.TextField(blank=True)
@@ -406,7 +411,6 @@ class acunetix_scan_result_db(models.Model):
     false_positive = models.TextField(null=True, blank=True)
     vuln_color = models.TextField(blank=True, null=True)
     jira_ticket = models.TextField(null=True, blank=True)
-    gitlab_ticket = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
     dup_hash = models.TextField(null=True, blank=True)
     vuln_duplicate = models.TextField(null=True, blank=True)
