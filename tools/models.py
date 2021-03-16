@@ -19,6 +19,16 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+class Results(models.Model):
+    gitlab_ticket = models.TextField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def gitlab_issue_url_component(self):
+        return self.gitlab_ticket.replace('#', '/-/issues/')
+
+
 # SSLScan Model.
 class sslscan_result_db(models.Model):
     scan_id = models.TextField(blank=True, null=True)
@@ -39,7 +49,7 @@ class nikto_result_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class nikto_vuln_db(models.Model):
+class nikto_vuln_db(Results):
     vuln_id = models.UUIDField(blank=True, null=True)
     scan_id = models.UUIDField(blank=True, null=True)
     project_id = models.TextField(blank=True, null=True)
@@ -54,14 +64,12 @@ class nikto_vuln_db(models.Model):
     osvdb = models.TextField(blank=True, null=True)
     false_positive = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
-    gitlab_ticket = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
     dup_hash = models.TextField(null=True, blank=True)
     vuln_duplicate = models.TextField(null=True, blank=True)
     false_positive_hash = models.TextField(null=True, blank=True)
     date_time = models.TextField(null=True, blank=True)
     username = models.CharField(max_length=256, null=True)
-
 
 
 # Nmap tool models

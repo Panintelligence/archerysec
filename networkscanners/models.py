@@ -20,7 +20,17 @@ from django.db import models
 from fernet_fields import EncryptedTextField
 
 
-class ov_scan_result_db(models.Model):
+class Results(models.Model):
+    gitlab_ticket = models.TextField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def gitlab_issue_url_component(self):
+        return self.gitlab_ticket.replace('#', '/-/issues/')
+
+
+class ov_scan_result_db(Results):
     scan_id = models.TextField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     project_id = models.UUIDField(null=True)
@@ -55,7 +65,6 @@ class ov_scan_result_db(models.Model):
     date_time = models.DateTimeField(null=True)
     false_positive = models.TextField(null=True, blank=True)
     jira_ticket = models.TextField(null=True, blank=True)
-    gitlab_ticket = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
     dup_hash = models.TextField(null=True, blank=True)
     vuln_duplicate = models.TextField(null=True, blank=True)
@@ -91,7 +100,7 @@ class task_schedule_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 
-class nessus_report_db(models.Model):
+class nessus_report_db(Results):
     project_id = models.UUIDField(null=True)
     scan_id = models.TextField(blank=True)
     vul_id = models.TextField(blank=True)
@@ -120,7 +129,6 @@ class nessus_report_db(models.Model):
     port = models.TextField(blank=True, null=True)
     scan_ip = models.TextField(blank=True, null=True)
     jira_ticket = models.TextField(null=True, blank=True)
-    gitlab_ticket = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
     dup_hash = models.TextField(null=True, blank=True)
     vuln_duplicate = models.TextField(null=True, blank=True)
@@ -148,6 +156,7 @@ class nessus_scan_db(models.Model):
     report_name = models.TextField(blank=True)
     target = models.TextField(blank=True)
 
+
 class nessus_targets_db(models.Model):
     scan_id = models.TextField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
@@ -163,7 +172,8 @@ class nessus_targets_db(models.Model):
     total_low = models.IntegerField(blank=True, null=True)
     report_name = models.TextField(blank=True)
 
-class nessus_scan_results_db(models.Model):
+
+class nessus_scan_results_db(Results):
     scan_id = models.UUIDField(blank=True)
     rescan_id = models.TextField(blank=True, null=True)
     scan_date = models.TextField(blank=True)
@@ -176,7 +186,6 @@ class nessus_scan_results_db(models.Model):
     vuln_duplicate = models.TextField(null=True, blank=True)
     false_positive_hash = models.TextField(null=True, blank=True)
     vuln_status = models.TextField(null=True, blank=True)
-
     report_name = models.TextField(blank=True)
     agent = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -201,7 +210,6 @@ class nessus_scan_results_db(models.Model):
     port = models.TextField(blank=True, null=True)
     scan_ip = models.TextField(blank=True, null=True)
     jira_ticket = models.TextField(null=True, blank=True)
-    gitlab_ticket = models.TextField(null=True, blank=True)
     scanner = models.TextField(default='Nessus', editable=False)
     target = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
