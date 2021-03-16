@@ -13,12 +13,12 @@
                     <div class="float-right">
                         <!-- Large modal -->
                         {% if jira_url %}
-                            <a href="/jira/submit_jira_ticket/?summary={{ data.VulnName }}&description={{ data.VulnName }}%0a%0a%0a Vulnerable URL: {{ data.vuln_url }} %0a%0a Vulnerable Parameter: {{ data.vector_input_values }} %0a%0a Solution: {{ data.remedy_guidance }} %0a%0a Archery URL: {SERVERIP}/acunetixscanner/acunetix_vuln_data/?vuln_id={{ data.vuln_id }} %0a%0a Request Header: {{ data.request_raw }}&scanner=acunetix&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }}"
+                            <a href="/jira/submit_jira_ticket/?summary={{ data.VulnName | urlencode }}&description={{ data.VulnName | urlencode }}%0a%0a%0a Vulnerable URL: {{ data.vuln_url | urlencode }} %0a%0a Vulnerable Parameter: {{ data.vector_input_values | urlencode }} %0a%0a Solution: {{ data.remedy_guidance | urlencode }} %0a%0a Archery URL: {SERVERIP}/acunetixscanner/acunetix_vuln_data/?vuln_id={{ data.vuln_id | urlencode }} %0a%0a Request Header: {{ data.request_raw | urlencode }}&scanner=acunetix&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }}"
                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Jira
                                 Ticket</a>
                         {% endif %}
                         {% if gitlab_url %}
-                            <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.VulnName }}&description={{ data.VulnName }}%0a%0a%0a Vulnerable URL: {{ data.vuln_url }} %0a%0a Vulnerable Parameter: {{ data.vector_input_values }} %0a%0a Solution: {{ data.remedy_guidance }} %0a%0a Archery URL: {SERVERIP}/acunetixscanner/acunetix_vuln_data/?vuln_id={{ data.vuln_id }} %0a%0a Request Header: {{ data.request_raw }}&scanner=acunetix&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }}"
+                            <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.VulnName | urlencode }}&description={{ data.VulnName | urlencode }}%0a%0a%0a Vulnerable URL: {{ data.vuln_url | urlencode }} %0a%0a Vulnerable Parameter: {{ data.vector_input_values | urlencode }} %0a%0a Solution: {{ data.remedy_guidance | urlencode }} %0a%0a Archery URL: {SERVERIP}/acunetixscanner/acunetix_vuln_data/?vuln_id={{ data.vuln_id | urlencode }} %0a%0a Request Header: {{ data.request_raw | urlencode }}&scanner=acunetix&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }}"
                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Gitlab
                                 Ticket</a>
                         {% endif %}

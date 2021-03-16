@@ -31,7 +31,7 @@
                                         <tbody>{% for data in nessus_all_vuln %}
                                             <tr data-target="#">
                                                 <td>
-                                                    <a href="{% url 'nessus:nessus_vuln_data' %}?scan_id={{ data.scan_id }}&target={{ data.target }}">{{ data.target }}</a>
+                                                    <a href="{% url 'nessus:nessus_vuln_data' %}?scan_id={{ data.scan_id | urlencode }}&target= {{ data.target | urlencode }}">{{ data.target }}</a>
                                                 </td>
                                                 <td><span
                                                         class="badge badge-pill badge-dark">{{ data.total_vuln }}</span>

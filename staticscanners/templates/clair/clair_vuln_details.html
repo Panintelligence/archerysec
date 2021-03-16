@@ -10,12 +10,12 @@
                     <div class="float-right">
                         <!-- Large modal -->
                         {% if jira_url %}
-                            <a href="/jira/submit_jira_ticket/?summary={{ data.Name }}&description=%0a%0a%0a {{ data.Description }} Namespace Name :  {{ data.NamespaceName }} %0a%0a Feature Name : {{ data.FeatureName }} %0a%0aFeature Version : {{ data.FeatureVersion }} Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=clair&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                            <a href="/jira/submit_jira_ticket/?summary={{ data.Name | urlencode }}&description=%0a%0a%0a {{ data.Description | urlencode }} Namespace Name :   {{ data.NamespaceName | urlencode }} %0a%0a Feature Name : {{ data.FeatureName | urlencode }} %0a%0aFeature Version :  {{ data.FeatureVersion | urlencode }} Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id | urlencode }} &scanner=clair&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "
                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Jira
                                 Ticket</a>
                         {% endif %}
                         {% if gitlab_url %}
-                            <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.Name }}&description=%0a%0a%0a {{ data.Description }} Namespace Name :  {{ data.NamespaceName }} %0a%0a Feature Name : {{ data.FeatureName }} %0a%0aFeature Version : {{ data.FeatureVersion }} Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=clair&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                            <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.Name | urlencode }}&description=%0a%0a%0a {{ data.Description | urlencode }} Namespace Name :   {{ data.NamespaceName | urlencode }} %0a%0a Feature Name : {{ data.FeatureName | urlencode }} %0a%0aFeature Version :  {{ data.FeatureVersion | urlencode }} Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id | urlencode }} &scanner=clair&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "
                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Gitlab
                                 Ticket</a>
                         {% endif %}
