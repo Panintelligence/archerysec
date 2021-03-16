@@ -10,12 +10,12 @@
                     <div class="float-right">
                         <!-- Large modal -->
                         {% if jira_url %}
-                            <a href="/jira/submit_jira_ticket/?summary={{ data.title }}&description=%0a%0a%0a {{ data.overview | safe }}  Module: {{ data.module_name | safe }} %0a%0a Vulnerable Version :  {{ data.vulnerable_versions | safe }} %0a%0aPatched Versions : {{ data.patched_versions | safe }} %0a%0a Title: {{ data.title }} %0a%0a References: {{ data.url | safe }} %0a%0a  Archery URL: {SERVERIP}/npmaudit/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=npmaudit&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                            <a href="/jira/submit_jira_ticket/?summary= {{ data.title | urlencode }}&description=%0a%0a%0a  {{ data.overview | urlencode }}  Module:  {{ data.module_name | urlencode }} %0a%0a Vulnerable Version :   {{ data.vulnerable_versions | urlencode }} %0a%0aPatched Versions :  {{ data.patched_versions | urlencode }} %0a%0a Title:  {{ data.title | urlencode }} %0a%0a References:  {{ data.url | urlencode }} %0a%0a  Archery URL: {SERVERIP}/npmaudit/vuln_dat/?vuln_id={{ data.vuln_id | urlencode }} &scanner=npmaudit&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "
                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Jira
                                 Ticket</a>
                         {% endif %}
                         {% if gitlab_url %}
-                            <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.title }}&description=%0a%0a%0a {{ data.overview | safe }}  Module: {{ data.module_name | safe }} %0a%0a Vulnerable Version :  {{ data.vulnerable_versions | safe }} %0a%0aPatched Versions : {{ data.patched_versions | safe }} %0a%0a Title: {{ data.title }} %0a%0a References: {{ data.url | safe }} %0a%0a  Archery URL: {SERVERIP}/npmaudit/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=npmaudit&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                            <a href="/gitlab/submit_gitlab_ticket/?summary= {{ data.title | urlencode }}&description=%0a%0a%0a  {{ data.overview | urlencode }}  Module:  {{ data.module_name | urlencode }} %0a%0a Vulnerable Version :   {{ data.vulnerable_versions | urlencode }} %0a%0aPatched Versions :  {{ data.patched_versions | urlencode }} %0a%0a Title:  {{ data.title | urlencode }} %0a%0a References:  {{ data.url | urlencode }} %0a%0a  Archery URL: {SERVERIP}/npmaudit/vuln_dat/?vuln_id={{ data.vuln_id | urlencode }} &scanner=npmaudit&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "
                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Gitlab
                                 Ticket</a>
                         {% endif %}

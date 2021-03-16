@@ -10,12 +10,12 @@
                             <div class="float-right">
                                 <!-- Large modal -->
                                 {% if jira_url %}
-                                    <a href="/jira/submit_jira_ticket/?summary={{ data.message }}&description=%0a%0a%0a {{ data.description }} File :  {{ data.file }} %0a%0a Scanner : {{ data.gl_scanner }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=gitlabcontainerscan&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                                    <a href="/jira/submit_jira_ticket/?summary={{ data.message | urlencode }}&description=%0a%0a%0a {{ data.description | urlencode }} File :  {{ data.file | urlencode }} %0a%0a Scanner : {{ data.gl_scanner | urlencode }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id | urlencode }} &scanner=gitlabcontainerscan&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "
                                        class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create
                                         Jira Ticket</a>
                                 {% endif %}
                                 {% if gitlab_url %}
-                                    <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.message }}&description=%0a%0a%0a {{ data.description }} File :  {{ data.file }} %0a%0a Scanner : {{ data.gl_scanner }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=gitlabcontainerscan&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                                    <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.message | urlencode }}&description=%0a%0a%0a {{ data.description | urlencode }} File :  {{ data.file | urlencode }} %0a%0a Scanner : {{ data.gl_scanner | urlencode }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id | urlencode }} &scanner=gitlabcontainerscan&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "
                                        class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create
                                         Gitlab Ticket</a>
                                 {% endif %}

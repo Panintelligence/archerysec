@@ -545,7 +545,7 @@
                                             <tbody>{% for data in pentest %}
                                                 <tr data-target="#">
                                                     <td width="20%"><a
-                                                            href="{% url 'manual_scan:vuln_list' %}?scan_id={{ data.scan_id }}&project_id={{ data.project_id }}">{{ data.scan_url }}</a>
+                                                            href="{% url 'manual_scan:vuln_list' %}?scan_id={{ data.scan_id | urlencode }}&project_id= {{ data.project_id | urlencode }}">{{ data.scan_url }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         {{ data.pentest_type }}
@@ -639,7 +639,7 @@
                                             {% for data in burp %}
                                                 <tr data-target="#">
                                                     <td width="20%"><a
-                                                            href="{% url 'burpscanner:burp_vuln_list' %}?scan_id={{ data.scan_id }}">{{ data.url }}</a>
+                                                            href="{% url 'burpscanner:burp_vuln_list' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.url }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -675,7 +675,7 @@
                                             {% for data in arachni %}
                                                 <tr data-target="#">
                                                     <td width="20%"><a
-                                                            href="{% url 'arachniscanner:arachni_list_vuln' %}?scan_id={{ data.scan_id }}">{{ data.url }}</a>
+                                                            href="{% url 'arachniscanner:arachni_list_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.url }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -711,7 +711,7 @@
                                             {% for data in webinspect %}
                                                 <tr data-target="#">
                                                     <td width="20%"><a
-                                                            href="{% url 'webinspectscanner:webinspect_list_vuln' %}?scan_id={{ data.scan_id }}">{{ data.url }}</a>
+                                                            href="{% url 'webinspectscanner:webinspect_list_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.url }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -747,7 +747,7 @@
                                             {% for data in netsparker %}
                                                 <tr data-target="#">
                                                     <td width="20%"><a
-                                                            href="{% url 'netsparkerscanner:netsparker_list_vuln' %}?scan_id={{ data.scan_id }}">{{ data.url }}</a>
+                                                            href="{% url 'netsparkerscanner:netsparker_list_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.url }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -783,7 +783,7 @@
                                             {% for data in acunetix %}
                                                 <tr data-target="#">
                                                     <td width="20%"><a
-                                                            href="{% url 'acunetixscanner:acunetix_list_vuln' %}?scan_id={{ data.scan_id }}">{{ data.url }}</a>
+                                                            href="{% url 'acunetixscanner:acunetix_list_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.url }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -857,7 +857,7 @@
                                                 {% for data in brakeman %}
                                                     <tr data-target="#">
                                                         <td width="20%">
-                                                            <a href="{% url 'brakeman:brakeman_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                            <a href="{% url 'brakeman:brakeman_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                         </td>
                                                         <td width="20%">
                                                             <div>
@@ -894,7 +894,7 @@
                                                 {% for data in twistlock %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'twistlock:twistlock_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'twistlock:twistlock_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -931,7 +931,7 @@
                                                 {% for data in dependency_check %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'dependencycheck:dependencycheck_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'dependencycheck:dependencycheck_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -966,7 +966,7 @@
                                             {% for data in findbugs %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'findbugs:findbugs_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'findbugs:findbugs_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1002,7 +1002,7 @@
                                             {% for data in clair %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'clair:clair_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'clair:clair_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1038,7 +1038,7 @@
                                             {% for data in npmaudit %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'npmaudit:npmaudit_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'npmaudit:npmaudit_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1075,7 +1075,7 @@
                                             {% for data in nodejsscan %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'nodejsscan:nodejsscan_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'nodejsscan:nodejsscan_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1112,7 +1112,7 @@
                                             {% for data in semgrepscan %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'semgrepscan:semgrepscan_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'semgrepscan:semgrepscan_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1150,7 +1150,7 @@
                                             {% for data in trivy %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'trivy:trivy_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'trivy:trivy_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1187,7 +1187,7 @@
                                             {% for data in gitlabsca %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'gitlabsca:gitlabsca_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'gitlabsca:gitlabsca_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1224,7 +1224,7 @@
                                             {% for data in gitlabsast %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'gitlabsast:gitlabsast_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'gitlabsast:gitlabsast_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1261,7 +1261,7 @@
                                             {% for data in gitlabcontainerscan %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'gitlabcontainerscan:gitlabcontainerscan_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'gitlabcontainerscan:gitlabcontainerscan_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1298,7 +1298,7 @@
                                             {% for data in tfsec %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'tfsec:tfsec_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'tfsec:tfsec_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1335,7 +1335,7 @@
                                             {% for data in whitesource %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'whitesource:whitesource_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'whitesource:whitesource_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1372,7 +1372,7 @@
                                             {% for data in checkmarx %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'checkmarx:checkmarx_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'checkmarx:checkmarx_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1409,7 +1409,7 @@
                                             {% for data in bandit %}
                                                 <tr data-target="#">
                                                     <td width="20%">
-                                                        <a href="{% url 'banditscanner:banditscan_list_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'banditscanner:banditscan_list_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1482,7 +1482,7 @@
                                                 <tr data-target="#">
 
                                                     <td width="20%"><a
-                                                            href="{% url 'networkscanners:vul_details' %}?scan_id={{ data.scan_id }}">{{ data.scan_ip }}</a>
+                                                            href="{% url 'networkscanners:vul_details' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.scan_ip }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1519,7 +1519,7 @@
                                             <tbody>{% for data in nessus_dat %}
                                                 <tr data-target="#">
 
-                                                    <td width="20%"><a href="{% url 'nessus:nessus_list' %}?scan_id={{ data.scan_id }}">{{ data.report_name }}</a>
+                                                    <td width="20%"><a href="{% url 'nessus:nessus_list' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.report_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1590,7 +1590,7 @@
                                             <tbody>{% for data in inspec_dat %}
                                                 <tr data-target="#">
                                                     <td>
-                                                        <a href="{% url 'inspec:inspec_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'inspec:inspec_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>
@@ -1627,7 +1627,7 @@
                                                 <tr data-target="#">
 
                                                     <td>
-                                                        <a href="{% url 'dockle:dockle_all_vuln' %}?scan_id={{ data.scan_id }}">{{ data.project_name }}</a>
+                                                        <a href="{% url 'dockle:dockle_all_vuln' %}?scan_id={{ data.scan_id | urlencode }}">{{ data.project_name }}</a>
                                                     </td>
                                                     <td width="20%">
                                                         <div>

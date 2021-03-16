@@ -23,11 +23,11 @@
                     <!--class="icon-trash"></i> Delete</a></li>-->
                     <li>
                         {% if jira_url %}
-                            <a href="/jira/submit_jira_ticket/?summary=SSLScan Result&description=Vulnerable URL: {{ data.scan_url }} %0a%0a SSLScan Output: {{ data.sslscan_output }} &scanner=SSLScan&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "><i
+                            <a href="/jira/submit_jira_ticket/?summary=SSLScan Result&description=Vulnerable URL: {{ data.scan_url | urlencode }} %0a%0a SSLScan Output: {{ data.sslscan_output | urlencode }} &scanner=SSLScan&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "><i
                                     class="icon-random"></i>Create Jira Ticket</a>
                         {% endif %}
                         {% if gitlab_url %}
-                            <a href="/gitlab/submit_gitlab_ticket/?summary=SSLScan Result&description=Vulnerable URL: {{ data.scan_url }} %0a%0a SSLScan Output: {{ data.sslscan_output }} &scanner=SSLScan&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "><i
+                            <a href="/gitlab/submit_gitlab_ticket/?summary=SSLScan Result&description=Vulnerable URL: {{ data.scan_url | urlencode }} %0a%0a SSLScan Output: {{ data.sslscan_output | urlencode }} &scanner=SSLScan&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "><i
                                     class="icon-random"></i>Create Gitlab Ticket</a>
                         {% endif %}
                     </li>

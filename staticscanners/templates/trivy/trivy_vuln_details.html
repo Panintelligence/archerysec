@@ -10,12 +10,12 @@
                     <div class="float-right">
                         <!-- Large modal -->
                         {% if jira_url %}
-                            <a href="/jira/submit_jira_ticket/?summary={{ data.VulnerabilityID }}&description=%0a%0a%0a {{ data.Description }} PkgName :  {{ data.PkgName }} %0a%0a InstalledVersion : {{ data.InstalledVersion }} %0a%0aFixedVersion : {{ data.FixedVersion }} %0a%0a Title: {{ data.Title }} %0a%0a References: {{ data.References }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=trivy&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                            <a href="/jira/submit_jira_ticket/?summary={{ data.VulnerabilityID | urlencode }}&description=%0a%0a%0a {{ data.Description | urlencode }} PkgName :  {{ data.PkgName | urlencode }} %0a%0a InstalledVersion : {{ data.InstalledVersion | urlencode }} %0a%0aFixedVersion : {{ data.FixedVersion | urlencode }} %0a%0a Title: {{ data.Title | urlencode }} %0a%0a References: {{ data.References | urlencode }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id | urlencode }} &scanner=trivy&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "
                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Jira
                                 Ticket</a>
                         {% endif %}
                         {% if gitlab_url %}
-                            <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.VulnerabilityID }}&description=%0a%0a%0a {{ data.Description }} PkgName :  {{ data.PkgName }} %0a%0a InstalledVersion : {{ data.InstalledVersion }} %0a%0aFixedVersion : {{ data.FixedVersion }} %0a%0a Title: {{ data.Title }} %0a%0a References: {{ data.References }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id }} &scanner=trivy&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                            <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.VulnerabilityID | urlencode }}&description=%0a%0a%0a {{ data.Description | urlencode }} PkgName :  {{ data.PkgName | urlencode }} %0a%0a InstalledVersion : {{ data.InstalledVersion | urlencode }} %0a%0aFixedVersion : {{ data.FixedVersion | urlencode }} %0a%0a Title: {{ data.Title | urlencode }} %0a%0a References: {{ data.References | urlencode }} %0a%0a  Archery URL: {SERVERIP}/webscanners/vuln_dat/?vuln_id={{ data.vuln_id | urlencode }} &scanner=trivy&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "
                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Gitlab
                                 Ticket</a>
                         {% endif %}

@@ -13,12 +13,12 @@
                     <div class="float-right">
                         <!-- Large modal -->
                         {% if jira_url %}
-                            <a href="/jira/submit_jira_ticket/?summary={{ data.name }}&description={{ data.issueDetail }}%0a%0a%0a Vulnerable URL: {{ data.host }} %0a%0a Vulnerable Parameter: {{ data.location }} %0a%0a Solution: {{ data.remediationBackground }} %0a%0a Archery URL: {SERVERIP}/webscanners/burp_vuln_data/?vuln_id={{ data.vuln_id }} %0a%0a Request Header: {{ data.requestHeader }}&scanner=burp&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                            <a href="/jira/submit_jira_ticket/?summary={{ data.name | urlencode }}&description= {{ data.issueDetail | urlencode }}%0a%0a%0a Vulnerable URL:  {{ data.host | urlencode }} %0a%0a Vulnerable Parameter:  {{ data.location | urlencode }} %0a%0a Solution:  {{ data.remediationBackground | urlencode }} %0a%0a Archery URL: {SERVERIP}/webscanners/burp_vuln_data/?vuln_id={{ data.vuln_id | urlencode }} %0a%0a Request Header: {{ data.requestHeader | urlencode }}&scanner=burp&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "
                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Jira
                                 Ticket</a>
                         {% endif %}
                         {% if gitlab_url %}
-                            <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.name }}&description={{ data.issueDetail }}%0a%0a%0a Vulnerable URL: {{ data.host }} %0a%0a Vulnerable Parameter: {{ data.location }} %0a%0a Solution: {{ data.remediationBackground }} %0a%0a Archery URL: {SERVERIP}/webscanners/burp_vuln_data/?vuln_id={{ data.vuln_id }} %0a%0a Request Header: {{ data.requestHeader }}&scanner=burp&vuln_id={{ data.vuln_id }}&scan_id={{ data.scan_id }} "
+                            <a href="/gitlab/submit_gitlab_ticket/?summary={{ data.name | urlencode }}&description= {{ data.issueDetail | urlencode }}%0a%0a%0a Vulnerable URL:  {{ data.host | urlencode }} %0a%0a Vulnerable Parameter:  {{ data.location | urlencode }} %0a%0a Solution:  {{ data.remediationBackground | urlencode }} %0a%0a Archery URL: {SERVERIP}/webscanners/burp_vuln_data/?vuln_id={{ data.vuln_id | urlencode }} %0a%0a Request Header: {{ data.requestHeader | urlencode }}&scanner=burp&vuln_id={{ data.vuln_id | urlencode }}&scan_id={{ data.scan_id | urlencode }} "
                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Gitlab
                                 Ticket</a>
                         {% endif %}
