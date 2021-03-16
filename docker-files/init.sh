@@ -27,5 +27,5 @@ else
     python3 manage.py migrate --noinput
     python3 manage.py initadmin
 
-    gunicorn -b 0.0.0.0:8000 archerysecurity.wsgi:application --workers=1 --threads=10 --timeout=1800
+    gunicorn -b 0.0.0.0:8000 archerysecurity.wsgi:application --workers=1 --threads=10 --timeout=1800 --limit-request-line=8190
 fi
