@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'import_export',
     'compliance',
     'notifications',
+    'rest_framework_jwt'
 
 ]
 
