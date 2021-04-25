@@ -32,9 +32,8 @@ jobs:
           run: |
            bash integration-test.sh || exit 1
         - name: Push to Docker Hub
-          uses: docker/build-push-action@v1
+          uses: docker/build-push-action@v2.4.0
           with:
             username: ${{ secrets.DOCKERHUB_USERNAME }}
             password: ${{ secrets.DOCKERHUB_TOKEN }}
-            repository: panintelligence/archerysec
-            tag_with_ref: true
+            tags: panintelligence/archerysec:latest
