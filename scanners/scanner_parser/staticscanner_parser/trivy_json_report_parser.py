@@ -45,7 +45,7 @@ def trivy_report_json(data, project_id, scan_id, username):
     date_time = datetime.now()
     vul_col = ''
     for vuln_data in data:
-        vuln = vuln_data['Vulnerabilities']
+        vuln = vuln_data.get('Vulnerabilities')
         if vuln is not None:
             for issue in vuln:
                 try:
